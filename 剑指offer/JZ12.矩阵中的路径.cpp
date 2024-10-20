@@ -17,9 +17,24 @@ public:
      * @param word string字符串 
      * @return bool布尔型
      */
+    bool DFS(vector<vector<char> >& matrix,string& word,int v,int depth)
+    {
+        
+        visited[v] = true;
+        for(int i =0;i<4;++i)
+        {
+            if()
+        }
+    }
+
     bool hasPath(vector<vector<char> >& matrix, string word) {
         // write code here
+        
     }
+
+private:
+    bool* visited[4];
+
 };
 
 /** @nc code=end */

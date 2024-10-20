@@ -33,7 +33,37 @@ public:
             return nullptr;
         }
 
-        
+        if(pNode->right)
+        {
+            auto* node = pNode->right;
+            while(node->left)
+            {
+                node = node->left;
+            }
+
+            return node;
+        }
+        else
+        {
+            auto* parent = pNode->next;
+            if(parent && parent->left == pNode)
+            {
+                return parent;
+            }
+            else if(parent && parent->right == pNode)
+            {
+                auto* node = pNode->next;
+                auto* parent = node->next;
+                while(parent&&parent->left != node)
+                {
+                    node = parent;
+                    parent = node->next;
+                }
+                return node->next;
+            }
+        }
+
+        return nullptr;
         
     }
 };
