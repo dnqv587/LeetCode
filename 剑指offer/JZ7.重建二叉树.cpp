@@ -31,10 +31,17 @@ public:
         {
             return nullptr;
         }
-        //创建节点
-        TreeNode *root = new TreeNode(preOrder.front());
+        
         //查找中序遍历，获取该节点的左右子树
         auto iter = std::find(vinOrder.begin(),vinOrder.end(),preOrder.front());
+
+        if(iter == vinOrder.end())
+        {
+            return nullptr;
+        }
+        //创建节点
+        TreeNode *root = new TreeNode(preOrder.front());
+
         //获取左子树的个数，从而截取前序遍历下序列
         int count = std::distance(vinOrder.begin(), iter);
         //创建左子树的前序遍历序列
@@ -47,11 +54,12 @@ public:
        //创建右子树的前序遍历序列
         std::vector<int> rpre(preOrder.begin() + 1 + count,preOrder.end());
         // 创建右子树的中序遍历序列
-        std::vector<int> rvin(iter,vinOrder.end());
+        std::vector<int> rvin(iter+1,vinOrder.end());
         //递归创建右子树
         root->right = reConstructBinaryTree(rpre, rvin);
 
         return root;
+    
     }
 };
 
@@ -59,5 +67,4 @@ public:
 前序遍历可以获取到根节点，根据根节点查找中序遍历，获取到该节点的左右子树，
 以递归的方式将左右子树截取出来，最后返回根节点
 */
-
-/** @nc code=end */
+ /** @nc code=end */
