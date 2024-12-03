@@ -20,7 +20,11 @@ public:
         }
         else if(exponent < 0)
         {
-            
+            for (int i = 0; i > exponent;--i)
+            {
+                result *= base;
+            }
+            result = 1/result;
         }
         return result;
     }
