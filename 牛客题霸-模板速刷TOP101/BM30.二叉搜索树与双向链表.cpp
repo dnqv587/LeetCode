@@ -18,34 +18,31 @@ struct TreeNode {
 };*/
 class Solution {
 public:
-	TreeNode* min(TreeNode* node){
-		while(node && node->left){
-			node = node->left;
-		}
-		return node;
-	}
-	
-	TreeNode* max(TreeNode* node){
-		while(node && node->right){
-			node = node->right;
-		}
-		return node;
-	}
-	
-	void del(TreeNode* node){
+	void inOrder(TreeNode* node, std::vector<TreeNode*>& vec){
 		if(!node){
 			return;
 		}
-		if(node->left && node->right){
-			
-		}
-		else{
-			
-		}
+		inOrder(node->left, vec);
+		vec.push_back(node);
+		inOrder(node->right, vec);
 	}
 	
     TreeNode* Convert(TreeNode* pRootOfTree) {
-        
+    	if(!pRootOfTree){
+    		return nullptr;
+    	}
+    	std::vector<TreeNode*> vec;
+        inOrder(pRootOfTree, vec);
+        for(auto iter=vec.begin();iter<vec.end();++iter){
+        	if( iter+1 == vec.end()){
+        		break;
+        	}
+        	else{
+        		(*iter)->right = *(iter+1);
+				(*(iter+1))->left = *iter;
+        	}
+        }
+        return vec.front();
     }
 };
 
