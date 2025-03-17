@@ -27,6 +27,24 @@ public:
      */
     TreeNode* reConstructBinaryTree(vector<int>& preOrder, vector<int>& vinOrder) {
         // write code here
+        if(preOrder.empty() || vinOrder.empty()){
+            return nullptr;
+        }
+        
+        auto pos = std::find(vinOrder.begin(),vinOrder.end(),preOrder.front());
+        if(pos == vinOrder.end()){
+            return nullptr;
+        }
+        TreeNode* node = new TreeNode(preOrder.front());
+        int lsize = std::distance(vinOrder.begin(),pos);
+        std::vector<int> lpvec(preOrder.begin()+1,preOrder.begin()+1+lsize);
+        std::vector<int> lvvec(vinOrder.begin(),pos);
+        node->left=reConstructBinaryTree(lpvec,lvvec);
+        //int rsize = std::distance(pos,vinOrder.end());
+        std::vector<int> rpvec(preOrder.begin()+lsize+1,preOrder.end());
+        std::vector<int> rvvec(pos+1,vinOrder.end());
+        node->right=reConstructBinaryTree(rpvec,rvvec);
+        return node;
     }
 };
 
