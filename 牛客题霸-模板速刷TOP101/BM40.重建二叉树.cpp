@@ -30,20 +30,19 @@ public:
         if(preOrder.empty() || vinOrder.empty()){
             return nullptr;
         }
-        
-        auto pos = std::find(vinOrder.begin(),vinOrder.end(),preOrder.front());
-        if(pos == vinOrder.end()){
+        int pre = preOrder.front();
+        auto mid = std::find(vinOrder.begin(), vinOrder.end(), pre);
+        if(mid == vinOrder.end()){
             return nullptr;
         }
-        TreeNode* node = new TreeNode(preOrder.front());
-        int lsize = std::distance(vinOrder.begin(),pos);
-        std::vector<int> lpvec(preOrder.begin()+1,preOrder.begin()+1+lsize);
-        std::vector<int> lvvec(vinOrder.begin(),pos);
-        node->left=reConstructBinaryTree(lpvec,lvvec);
-        //int rsize = std::distance(pos,vinOrder.end());
-        std::vector<int> rpvec(preOrder.begin()+lsize+1,preOrder.end());
-        std::vector<int> rvvec(pos+1,vinOrder.end());
-        node->right=reConstructBinaryTree(rpvec,rvvec);
+        TreeNode* node = new TreeNode(pre);
+        int len = std::distance(vinOrder.begin(), mid);
+        std::vector<int> lpreVec(preOrder.begin()+1, preOrder.begin()+len+1);
+        std::vector<int> lvinVec(vinOrder.begin(), mid);
+        std::vector<int> rpreVec(preOrder.begin()+len+1, preOrder.end());
+        std::vector<int> rvinVec(mid+1, vinOrder.end());
+        node->left = reConstructBinaryTree(lpreVec, lvinVec);
+        node->right = reConstructBinaryTree(rpreVec, rvinVec);
         return node;
     }
 };

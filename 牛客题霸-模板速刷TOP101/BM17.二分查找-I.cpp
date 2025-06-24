@@ -19,24 +19,21 @@ public:
      */
     int search(vector<int>& nums, int target) {
         // write code here
-        if(nums.empty()){
+        if(nums.size() <= 0){
             return -1;
         }
-        int len = nums.size();
-        int begin = 0;
-        int end = len-1;
-        int mid = (end-begin)/2;
-        while(begin<=end){
-            if(target == nums[mid]){
+        int left = 0;
+        int right = nums.size()-1;
+        while(left <= right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] == target){
                 return mid;
             }
-            if(target > nums[mid]){
-                begin=mid+1;
+            if(nums[mid] > target){
+                right = mid -1;
+            }else{
+                left = mid+1;
             }
-            else{
-                end = mid-1;
-            }
-            mid = begin + (end-begin)/2;
         }
         return -1;
     }

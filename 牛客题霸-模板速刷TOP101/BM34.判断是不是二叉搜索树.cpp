@@ -24,31 +24,22 @@ public:
      * @param root TreeNode类 
      * @return bool布尔型
      */
-    
-    bool inOrder(TreeNode* node, std::vector<TreeNode*>& vec){
-        if(!node){
-            return true;
-        }
-        if(!inOrder(node->left, vec)){
-            return false;
-        }
-        if(!vec.empty()){
-            if(vec.back()->val >= node->val){
-                return false;
-            }
-        }
-        vec.push_back(node);
-        
-        return inOrder(node->right, vec);
-    }
+    int preVal = std::numeric_limits<int>::lowest();
     
     bool isValidBST(TreeNode* root) {
         if(!root){
+            return true;
+        }
+        if(!isValidBST(root->left)){
             return false;
         }
-        // write code here
-        std::vector<TreeNode*> vec;
-        return inOrder(root, vec);
+        if(root->val < preVal){
+            return false;
+        }
+        if(isValidBST(root->right)){
+            return false;
+        }
+        return true;
     }
 };
 

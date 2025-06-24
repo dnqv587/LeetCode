@@ -26,42 +26,44 @@ public:
      * @return ListNode类
      */
      
-    void reverse(ListNode* node){
-        ListNode* curNode = node;
-        ListNode* preNode = nullptr;
-        while(curNode){
-            ListNode* temp=curNode->next;
-            curNode->next=preNode;
-            preNode=curNode;
-            curNode=temp;
+     ListNode* reverse(ListNode* node) {
+        if (!node) {
+            return nullptr;
         }
+        ListNode* preNode = nullptr;
+        while (node) {
+            ListNode* temp = node->next;
+            node->next = preNode;
+            preNode = node;
+            node = temp;
+        }
+        return preNode;
     }
-     
+    
     ListNode* reverseBetween(ListNode* head, int m, int n) {
         // write code here
-        ListNode *newNode = new ListNode(-1);
-        newNode->next = head;
-        ListNode *curNode = newNode;
-        int count=0;
-        for(;count<m-1;++count){
-            ListNode* curNode = curNode->next;
+        if (m >= n) {
+            return head;
         }
-        ListNode* lnode=curNode;
-        for (; count < n + 1; ++count)
-        {
-            ListNode* curNode = curNode->next;
+        if (!head) {
+            return nullptr;
         }
-        ListNode* rnode=curNode;
-        
-        ListNode* lcutNode = lnode->next;
-        ListNode* rcutNode = rnode->next;
-        
-        lnode->next=nullptr;
-        rnode->next=nullptr;
-
-        reverse(lcutNode);
-        lnode->next = rnode;
-        lcutNode->next = rcutNode;
+        int count = 0;
+        ListNode* curNode = head;
+        while (++count < m-1) {
+            curNode = curNode->next;
+        }
+        ListNode* left1 = curNode;
+        ListNode* left2 = curNode->next;
+    
+        while (++count <= n) {
+            curNode = curNode->next;
+        }
+        ListNode* right = curNode->next;
+        curNode->next = nullptr;
+    
+        left1->next = reverse(left2);
+        left2->next = right;
         return head;
     }
 };

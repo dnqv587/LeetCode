@@ -24,61 +24,42 @@ public:
      * @param head2 ListNode类 
      * @return ListNode类
      */
-    ListNode* addInList(ListNode* head1, ListNode* head2) {
-        // write code here
-        ListNode* curNode1 = head1;
-        ListNode* preNode1 = nullptr;
-        ListNode* curNode2 = head2;
-        ListNode* preNode2 = nullptr;
-        while(curNode1 || curNode2){
-          if(curNode1){
-            ListNode* tempNode = curNode1->next;
-            curNode1->next = preNode1;
-            preNode1 = curNode1;
-            curNode1 = tempNode;
-          }
-          if(curNode2){
-            ListNode* tempNode = curNode2->next;
-            curNode2->next = preNode2;
-            preNode2 = curNode2;
-            curNode2 = tempNode;
-          }
-        }
-        ListNode* newNode = preNode1;
-        ListNode* curNode = newNode; 
-        int next = 0;
-        while(preNode1 || preNode2){
-          int curVal=0;
-          if(preNode1){
-            curVal += preNode1->val;
-            preNode1 = preNode1->next;
-          }
-          if(preNode2){
-            curVal += preNode2->val;
-            preNode2 = preNode2->next;
-          }
-          curVal +=next;
-          curNode->val = curVal%10;
-          curNode->next = preNode1?preNode1:preNode2;
-          next = curVal/10;
-          if(!curNode->next){
-            if(next){
-              curNode->next = new ListNode(next);
-            }
-          }
-          else{
-            curNode = curNode->next;
-          }
-        }
-        ListNode* newPreNode = nullptr;
-        while(newNode){
-          ListNode* temp = newNode->next;
-          newNode->next = newPreNode;
-          newPreNode = newNode;
-          newNode = temp;
-        }
-        return newPreNode;
+     
+    ListNode* reverse(ListNode* node){
+      if(!node){
+        return nullptr;
       }
+      ListNode* curNode = node;
+      ListNode* preNode = nullptr;
+      while(curNode){
+        ListNode* temp = curNode->next;
+        curNode->next = preNode;
+        preNode = curNode;
+        curNode = temp;
+      }
+      return preNode;
+    }
+    ListNode* addInList(ListNode* head1, ListNode* head2) {
+      // write code here
+      ListNode* node1=reverse(head1);
+      ListNode* node2=reverse(head2);
+      ListNode* newNode = new ListNode(-1);
+      ListNode* curNode = newNode;
+      int preVal = 0;
+      while(node1 || node2){
+        int val = (node1?node1->val:0 ) + (node2?node2->val:0);
+        curNode->next = new ListNode((val + preVal) %10 );
+        curNode = curNode->next;
+        preVal = (val + preVal)/10;
+        
+        node1 = node1?node1->next:node1;
+        node2 = node2?node2->next:node2;
+      }
+      if(preVal){
+        curNode->next = new ListNode(preVal);
+      }
+      return reverse(newNode->next);
+    }
 };
 
 /** @nc code=end */

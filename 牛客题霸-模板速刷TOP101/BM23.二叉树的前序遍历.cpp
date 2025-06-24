@@ -25,19 +25,19 @@ public:
      * @return int整型vector
      */
      
-     void visit(TreeNode* node, std::vector<int>& vec){
+     void visit(std::vector<int>& vec, TreeNode* node){
          if(!node){
              return;
          }
          vec.push_back(node->val);
-         visit(node->left, vec);
-         visit(node->right, vec);
+         visit(vec, node->left);
+         visit(vec, node->right);
      }
      
     vector<int> preorderTraversal(TreeNode* root) {
         // write code here
         std::vector<int> vec;
-        visit(root, vec);
+        visit(vec, root);
         return vec;
     }
 };

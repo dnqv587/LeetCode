@@ -18,7 +18,19 @@ public:
      */
     int InversePairs(vector<int>& nums) {
         // write code here
-        
+        int result = 0;
+        int len = nums.size();
+        for(int i=0;i<len;++i){
+            
+            int count=0;
+            for(int j=i;j>=0;--j){
+                if(nums[i] < nums[j]){
+                    ++count;
+                }
+            }
+            result +=count;
+        }
+        return result%1000000007;
     }
 };
 

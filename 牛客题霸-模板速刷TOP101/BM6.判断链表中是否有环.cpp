@@ -18,21 +18,22 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* lowNode = head;
-        ListNode* highNode = head;
-        while (highNode && lowNode) {
-          lowNode = lowNode->next;
-          if (highNode->next) {
-            highNode = highNode->next->next;
-          }
-          else {
-            return false;
-          }
-          if (lowNode == highNode) {
-            return true;
-          }
-        }
+      ListNode* fastNode = head->next;
+      if(!fastNode){
         return false;
+      }
+      ListNode* lowNode = head;
+      while(lowNode){
+        if(fastNode == lowNode){
+          return true;
+        }
+        if(!fastNode->next || !fastNode->next->next){
+          return false;
+        }
+        fastNode = fastNode->next->next;
+        lowNode = lowNode->next;
+      }
+      return false;
     }
 };
 

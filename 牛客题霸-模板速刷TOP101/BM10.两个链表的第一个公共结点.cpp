@@ -21,13 +21,13 @@ ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
 	if (!pHead1 || !pHead2) {
 	  return nullptr;
 	}
-	ListNode* curNode1 = pHead1;
-	ListNode* curNode2 = pHead2;
-	while (curNode1 != curNode2) {
-	  curNode1 = curNode1 ?curNode1->next:pHead2;
-	  curNode2 = curNode2?curNode2->next:pHead1;
+	ListNode* curNode1=pHead1;
+	ListNode* curNode2=pHead2;
+	while(curNode1 != curNode2){
+		curNode1 = curNode1?curNode1->next:pHead2;
+		curNode2=curNode2?curNode2->next:pHead1;
 	}
-	return curNode1;
+	return curNode2;
   }
 };
 

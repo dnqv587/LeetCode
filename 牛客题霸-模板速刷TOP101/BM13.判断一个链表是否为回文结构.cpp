@@ -30,7 +30,7 @@ public:
             str.push_back(head->val);
             head = head->next;
         }
-        std::string rstr(str.rbegin(),str.rend());
+        std::string rstr(str.rbegin(), str.rend());
         return str == rstr;
     }
 };

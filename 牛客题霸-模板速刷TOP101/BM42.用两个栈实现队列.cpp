@@ -1,6 +1,6 @@
 /**
  * @nc app=nowcoder id=54275ddae22f475981afa2244dd448c6 topic=295 question=23281 lang=C++
- * 2025-03-16 23:26:15
+ * 2025-04-22 10:44:38
  * https://www.nowcoder.com/practice/54275ddae22f475981afa2244dd448c6?tpId=295&tqId=23281
  * [BM42] 用两个栈实现队列
  */
@@ -21,9 +21,9 @@ public:
                 stack1.pop();
             }
         }
-        auto ret = stack2.top();
+        int val = stack2.top();
         stack2.pop();
-        return ret;
+        return val;
     }
 
 private:

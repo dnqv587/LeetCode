@@ -27,7 +27,7 @@ public:
     bool isCompleteTree(TreeNode* root) {
         // write code here
         if(!root){
-            return true;
+            return false;
         }
         std::queue<TreeNode*> que;
         que.push(root);
@@ -35,17 +35,18 @@ public:
         while(!que.empty()){
             int size = que.size();
             for(int i=0;i<size;++i){
-                auto* node = que.front();
+                auto node = que.front();
                 que.pop();
                 if(node){
-                    if(flag){ //空节点在层序遍历的中间
+                    if(flag){
                         return false;
                     }
                     que.push(node->left);
                     que.push(node->right);
+                    
                 }else{
-                    flag=true;//标记层序遍历的空节点出现的位置
-                }
+                    flag = true;
+                } 
             }
         }
         return true;

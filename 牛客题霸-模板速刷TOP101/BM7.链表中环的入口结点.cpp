@@ -20,33 +20,28 @@ struct ListNode {
 class Solution {
 public:
 ListNode* EntryNodeOfLoop(ListNode* pHead) {
-    if (!pHead) {
-      return nullptr;
-    }
-    ListNode* slowNode = pHead;
-    ListNode* fastNode = pHead;
-    while (slowNode && fastNode) {
-      slowNode = slowNode->next;
-      if (fastNode->next) {
-        fastNode = fastNode->next->next;
-      }
-      else {
+    if(!pHead){
         return nullptr;
-      }
-      if (fastNode == slowNode) {
-        break;
-      }
     }
-    if (!slowNode || !fastNode) {
-      return nullptr;
+    ListNode* fastNode = pHead;
+    ListNode* slowNode = pHead;
+    while(fastNode && slowNode){
+        if(!fastNode->next || !fastNode->next->next){
+            return nullptr;
+        }
+        fastNode = fastNode->next->next;
+        slowNode = slowNode->next;
+        if(fastNode == slowNode){
+            break;
+        }
     }
     fastNode = pHead;
-    while (fastNode != slowNode) {
-      fastNode = fastNode->next;
-      slowNode = slowNode->next;
+    while(fastNode != slowNode){
+        fastNode = fastNode->next;
+        slowNode = slowNode->next;
     }
     return fastNode;
-  }
+}
 };
 
 /** @nc code=end */

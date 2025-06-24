@@ -18,29 +18,26 @@ struct TreeNode {
 };*/
 class Solution {
 public:
-	void inOrder(TreeNode* node, std::vector<TreeNode*>& vec){
-		if(!node){
-			return;
-		}
-		inOrder(node->left, vec);
-		vec.push_back(node);
-		inOrder(node->right, vec);
-	}
+    
+    void inOrder(std::vector<TreeNode*>& vec, TreeNode* node){
+        if(!node){
+            return;
+        }
+        inOrder(vec, node->left);
+        vec.push_back(node);
+        inOrder(vec, node->right);
+    }
 	
     TreeNode* Convert(TreeNode* pRootOfTree) {
-    	if(!pRootOfTree){
-    		return nullptr;
-    	}
-    	std::vector<TreeNode*> vec;
-        inOrder(pRootOfTree, vec);
-        for(auto iter=vec.begin();iter<vec.end();++iter){
-        	if( iter+1 == vec.end()){
-        		break;
-        	}
-        	else{
-        		(*iter)->right = *(iter+1);
-				(*(iter+1))->left = *iter;
-        	}
+        if(!pRootOfTree){
+            return nullptr;
+        }
+        std::vector<TreeNode*> vec;
+        inOrder(vec, pRootOfTree);
+        for(auto i=vec.begin();i!=vec.end();++i){
+            TreeNode* node = *i;
+            node->left = i==vec.begin()?nullptr:*(i-1);
+            node->right =  (i+1)==vec.end()?nullptr:*(i+1);
         }
         return vec.front();
     }

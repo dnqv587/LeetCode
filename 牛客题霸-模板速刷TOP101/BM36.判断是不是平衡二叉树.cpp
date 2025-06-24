@@ -24,23 +24,23 @@ public:
      * @param pRoot TreeNode类 
      * @return bool布尔型
      */
-    
     int depth(TreeNode* node){
         if(!node){
             return 0;
         }
         return std::max(depth(node->left), depth(node->right)) + 1;
     }
+    
      
     bool IsBalanced_Solution(TreeNode* pRoot) {
         // write code here
         if(!pRoot){
             return true;
         }
-        
-        if(std::abs(depth(pRoot->left)-depth(pRoot->right))>1){
+        if(std::abs(depth(pRoot->left) - depth(pRoot->right)) > 1){
             return false;
         }
+
         return IsBalanced_Solution(pRoot->left) && IsBalanced_Solution(pRoot->right);
     }
 };

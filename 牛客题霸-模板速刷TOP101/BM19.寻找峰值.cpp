@@ -19,12 +19,18 @@ public:
     int findPeakElement(vector<int>& nums) {
         // write code here
         int len = nums.size();
+        if(len <=0){
+            return -1;
+        }
+        int max = 0;
         for(int i=0;i<len;++i){
-            if((i-1< 0 || nums[i]>nums[i-1]) && (i+1>len-1 || nums[i]>nums[i+1])){
-                return i;
+            if(nums[i]<nums[max]){
+                return max;
+            }else{
+                max = i;
             }
         }
-        return -1;
+        return max;
     }
 };
 

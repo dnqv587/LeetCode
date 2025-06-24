@@ -1,6 +1,6 @@
 /**
  * @nc app=nowcoder id=37548e94a270412c8b9fb85643c8ccc2 topic=295 question=726 lang=C++
- * 2025-03-17 09:57:21
+ * 2025-04-22 13:44:01
  * https://www.nowcoder.com/practice/37548e94a270412c8b9fb85643c8ccc2?tpId=295&tqId=726
  * [BM44] 有效括号序列
  */
@@ -26,15 +26,18 @@ public:
             if(stk.empty()){
                 stk.push(c);
             }else{
-                char top=stk.top();
-                if(top == '(' && c==')' || top=='{' && c=='}' || top=='['&& c==']'){
+                char top = stk.top();
+                if(top=='(' && c==')' || top=='{' && c=='}' || top=='['&&c==']'){
                     stk.pop();
                 }else{
                     stk.push(c);
                 }
             }
         }
-        return stk.empty();
+        if(stk.empty()){
+            return true;
+        }
+        return false;
     }
 };
 

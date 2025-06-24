@@ -24,14 +24,13 @@ public:
      * @return ListNode类
      */
     ListNode* ReverseList(ListNode* head) {
-        // write code here
-        ListNode* currNode= head;
+        ListNode* curNode = head;
         ListNode* preNode = nullptr;
-        while(currNode){
-            ListNode* tempNode = currNode->next;
-            currNode->next = preNode;
-            preNode = currNode;
-            currNode = tempNode;
+        while(curNode){
+            ListNode* tempNode = curNode->next;
+            curNode->next = preNode;
+            preNode = curNode;
+            curNode = tempNode;  
         }
         return preNode;
     }

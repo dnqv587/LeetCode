@@ -25,14 +25,32 @@ public:
      */
     ListNode* oddEvenList(ListNode* head) {
         // write code here
-        ListNode* curNode = head;
-        int n=1;
-        while(curNode){
-            if(n%2==1){
-                curNode->next = 
-            }
+        if(!head){
+            return nullptr;
         }
-
+        std::vector<ListNode*> oddVec;
+        std::vector<ListNode*> evenVec;
+        int count =0;
+        while(head){
+            if(++count%2==0){
+                evenVec.push_back(head);
+            }else{
+                oddVec.push_back(head);
+            }
+            head = head->next;
+        }
+        ListNode* newNode = new ListNode(-1);
+        ListNode* curNode = newNode;
+        for(auto i:oddVec){
+            curNode->next=i;
+            curNode=curNode->next;
+        }
+        for(auto i:evenVec){
+            curNode->next=i;
+            curNode=curNode->next;
+        }
+        curNode->next=nullptr;
+        return newNode->next;
     }
 };
 

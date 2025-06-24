@@ -24,14 +24,14 @@ public:
      * @param pRoot TreeNode类 
      * @return TreeNode类
      */
-    void swap(TreeNode* node){
-        if(!node){
-            return;
-        }
-        swap(node->left);
-        swap(node->right);
-        std::swap(node->left,node->right);
-    }
+     void swap(TreeNode* node){
+         if(!node){
+             return;
+         }
+         swap(node->left);
+         swap(node->right);
+         std::swap(node->left, node->right);
+     }
     
     TreeNode* Mirror(TreeNode* pRoot) {
         // write code here

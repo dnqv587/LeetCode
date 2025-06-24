@@ -1,6 +1,6 @@
 /**
  * @nc app=nowcoder id=4c776177d2c04c2494f2555c9fcc1e49 topic=295 question=23268 lang=C++
- * 2025-03-17 09:46:51
+ * 2025-04-22 11:14:07
  * https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=295&tqId=23268
  * [BM43] 包含min函数的栈
  */
@@ -10,27 +10,26 @@
 class Solution {
 public:
     void push(int value) {
-        if(_stack2.empty() || value < _stack2.top()){
-            _stack2.push(value);
-        }else{
-            _stack2.push(_stack2.top());
-        }
-        _stack1.push(value);
+        stack_.push(value);
+        set_.insert(value);
     }
     void pop() {
-        _stack2.pop();
-        _stack1.pop();
-        
+        auto pos=std::find(set_.begin(), set_.end(),stack_.top());
+        if(pos != set_.end()){
+            set_.erase(pos);
+        }
+        stack_.pop();
     }
     int top() {
-        return _stack1.top();
+        return stack_.top();
     }
     int min() {
-       return _stack2.top();
+        return *set_.begin();
     }
+    
 private:
-    std::stack<int> _stack1;
-    std::stack<int> _stack2;
+    std::stack<int> stack_;
+    std::multiset<int> set_;
 };
 
 /** @nc code=end */

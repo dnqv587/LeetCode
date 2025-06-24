@@ -25,25 +25,26 @@ public:
      * @return ListNode类
      */
     ListNode* FindKthToTail(ListNode* pHead, int k) {
-        // write code here
-        if (!pHead || !k) {
+      // write code here
+      if(!pHead){
+        return nullptr;
+      }
+      ListNode* fastNode = pHead;
+      ListNode* slowNode = pHead;
+      for(int i=0;i<k;++i){
+        if(!fastNode){
           return nullptr;
         }
-        ListNode* fastNode = pHead;
-        ListNode* slowNode = pHead;
-        int count = 0;
-        for (int i=0;i<k;++i) {
-          if (!fastNode) {
-            return nullptr;
-          }
-          fastNode = fastNode->next;
-        }
-        while (fastNode) {
-          fastNode = fastNode->next;
-          slowNode = slowNode->next;
-        }
-        return slowNode;
+        fastNode = fastNode->next;
       }
+      
+      while(fastNode){
+        fastNode = fastNode->next;
+        slowNode = slowNode->next;
+      }
+      return slowNode;
+      
+    }
 };
 
 /** @nc code=end */

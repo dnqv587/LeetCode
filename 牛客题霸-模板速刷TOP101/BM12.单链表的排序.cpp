@@ -25,20 +25,19 @@ public:
      */
     ListNode* sortInList(ListNode* head) {
         // write code here
-        std::map<int,ListNode*> map;
-      
+        std::map<int, ListNode*> orderNode;
         while(head){
-          map.insert(std::make_pair(head->val,head));
+          orderNode.insert(std::make_pair(head->val, head));
           head = head->next;
         }
-        ListNode* sortNode = new ListNode(-1);
-        ListNode* curNode = sortNode;
-        for(auto i : map){
-          curNode->next= i.second;
+        ListNode* newNode = new ListNode(-1);
+        ListNode* curNode = newNode;
+        for(auto i: orderNode){
+          curNode->next = i.second;
           curNode = curNode->next;
         }
         curNode->next = nullptr;
-        return sortNode->next;
+        return newNode->next;
     }
 };
 
